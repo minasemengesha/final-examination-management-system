@@ -1,0 +1,25 @@
+# SQL Server Backup Files
+*.bak
+*.trn
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+
+# Operating System Files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# VS Code Workspace
+.vscode/
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Temporary Database Files
+*.mdf
+*.ldf
