@@ -37,31 +37,29 @@ The project focuses on database design, implementation, data integrity, SQL prog
 ## Project Structure
 
 Final-Examination-Management-System/
-│
-├── README.md
-│
-├── docs/
-│   ├── project-description.md
-│   ├── requirements.md
-│   ├── ERD.png
-│   ├── relational-schema.md
-│   └── normalization.md
-│
-├── database/
-│   ├── 01_create_database.sql
-│   ├── 02_create_tables.sql
-│   ├── 03_constraints.sql
-│   ├── 04_insert_data.sql
-│   ├── 05_queries.sql
-│   ├── 06_views.sql
-│   ├── 07_stored_procedures.sql
-│   ├── 08_triggers.sql
-│   └── 09_database_recovery.sql
-│
-└── screenshots/
-    ├── database.png
-    ├── tables.png
-    └── query_results.png
+ - .gitignore
+ - LICENSE
+ - README.md
+- docs/
+    - project-description.md
+    - requirements.md
+    - ERD.png
+    - relational-schema.md
+    - normalization.md
+- database/
+    - 01_create_database.sql
+    - 02_create_tables.sql
+    - 03_constraints.sql
+    - 04_insert_data.sql
+    - 05_queries.sql
+    - 06_views.sql
+    - 07_stored_procedures.sql
+    - 08_triggers.sql
+    - 09_database_recovery.sql
+- screenshots/
+    - database.png
+    - tables.png
+    - query_results.png
 
 ## Key Database Concepts
 
@@ -75,14 +73,10 @@ Final-Examination-Management-System/
 - Triggers
 - Database Backup and Recovery
 
-## Project Status
-
-- Currently under development.
-
 ## Author
 
 Minase Mengesha
 
 ## License
 
-This project is developed for educational purposes.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
