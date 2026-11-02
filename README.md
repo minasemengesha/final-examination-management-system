@@ -91,27 +91,46 @@ Before running this project, make sure you have:
 ### Installation
 
 1. Clone the repository:
-git clone [YOUR_REPOSITORY_URL](https://github.com/minasemengesha/final-examination-management-system) 
+   git clone https://github.com/minasemengesha/final-examination-management-system.git
+   cd final-examination-management-system
 2. Open the project folder in Visual Studio Code or SSMS.
 3. Navigate to the database/ directory.
 4. Execute the SQL scripts in the following order:
-Order SQL Script               Description                                            1      01_create_database.sql   Create the database                                  2      02_create_tables.sql     Create all tables                                    3      03_constraints.sql       Add database constraints                             4      04_insert_data.sql       Insert sample records                                5      05_queries.sql           Execute SQL queries                                   6      06_views.sql             Create database views                                7      07_stored_procedures.sql Create stored procedures                             8      08_triggers.sql          Create database triggers                             9      09_database_recovery.sql Demonstrate backup and recovery 
+                   
+- 01_create_database.sql     
+- 02_create_tables.sql     
+- 03_constraints.sql           
+- 04_insert_data.sql     
+- 05_queries.sql  
+- 06_views.sql        
+- 07_stored_procedures.sql 
+- 08_triggers.sql            
+- 09_database_recovery.sql
 
 Note: Review the backup file location in 09_database_recovery.sql and adjust it to match your SQL Server environment.
 
 ## 📚 Documentation
 
-Detailed project documentation is available in the docs/ directory:
-
-- Project Description
-- Requirements
-- Entity Relationship Diagram
-- Relational Schema
-- Database Normalization
+- [Requirements](docs/Client-Interview-Form.pdf)
+- [Project Description](docs/Project-Documentation.pdf)
+- ERD
+![ERD](docs/ERD.png)
+- [Relational Schema](docs/Client-Interview-Form.pdf)
+- [Normalization](docs/Project-Documentation.pdf)
 
 ## 📸 Screenshots
 
-Project implementation screenshots are available in the screenshots/ directory.
+### Database
+
+![Database](screenshots/database.png)
+
+### Tables
+
+![Tables](screenshots/tables.png)
+
+### Query Results
+
+![Query Results](screenshots/query_results.png)
 
 ## 👨‍💻 Author
 
