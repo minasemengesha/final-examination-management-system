@@ -15,86 +15,94 @@ The system contains six main entity tables and five associative tables.
 
 1. Department
 Stores information about academic departments.
-- Did (PK): Department ID.
-- Dname: Department name.
-- Dhead: Department head's name.
-- Dlocation: Department location.
+- DepartmentID (PK): Unique department identifier.
+- DepartmentName: Name of the department.
+- DepartmentHeadName: Name of the department head.
+- DepartmentLocation: Location of the department.
 2. Student
 Stores information about students.
-- sidno (PK): Student ID number.
-- sname: Student first name.
-- smname: Student middle name.
-- slname: Student last name.
-- ssex: Student sex.
-- sbdate: Student birth date.
-- Did (FK): Department ID.
-- RoomID (FK): Assigned examination room.
+- StudentID (PK): Unique student identifier.
+- FirstName: Student's first name.
+- MiddleName: Student's middle name.
+- LastName: Student's last name.
+- Sex: Student's sex.
+- DateOfBirth: Student's date of birth.
+- DepartmentID (FK): References the department to which the student belongs.
 3. Teacher
 Stores information about teachers.
-- Tid (PK): Teacher ID.
-- tfname: Teacher first name.
-- tmname: Teacher middle name.
-- tlname: Teacher last name.
-- tsex: Teacher sex.
-- tbdate: Teacher birth date.
-- salary: Teacher salary.
-- Did (FK): Department ID.
+- TeacherID (PK): Unique teacher identifier.
+- FirstName: Teacher's first name.
+- MiddleName: Teacher's middle name.
+- LastName: Teacher's last name.
+- Sex: Teacher's sex.
+- DateOfBirth: Teacher's date of birth.
+- Salary: Teacher's salary.
+- DepartmentID (FK): References the department to which the teacher belongs.
 4. ExamRoom
 Stores information about examination rooms.
-- RoomID (PK): Automatically generated room ID.
-- bnum: Building number.
-- roomnum: Room number.
-- Did (FK): Department ID.
-- Constraint: The combination of bnum and roomnum must be unique.
+- RoomID (PK): Unique room identifier, generated automatically.
+- BuildingNumber: Building number.
+- RoomNumber: Room number.
+- DepartmentID (FK): References the department responsible for the room.
+- Constraint: The combination of BuildingNumber and RoomNumber must be unique.
 5. Exam
-Stores information about examinations.
-- ecode (PK): Examination code.
-- ename: Examination name.
-- time: Total time allocated to complete the examination.
+Stores general information about examinations.
+- ExamCode (PK): Unique examination identifier.
+- ExamName: Name of the examination.
 6. Question
-Stores information about examination questions.
-- qcode (PK): Question code.
-- no_question: Total number of questions in the examination.
-- ecode (FK): Examination code.
+Stores information about examination question papers. Each record represents a question paper or collection of questions, not an individual question.
+- QuestionCode (PK): Unique question paper identifier.
+- ExamCode (FK): References the examination associated with the question paper.
+- NumberOfQuestions: Total number of questions in the paper.
+- TimeAllowed: Total time allocated to complete the question paper.
 
 ### Associative Tables
 
 These tables implement Many-to-Many (M:N) relationships.
 
 7. StudentExam
-Connects students with examinations and stores their examination results.
-- sidno (PK, FK): Student ID.
-- ecode (PK, FK): Examination code.
-- mark: Student examination mark.
-- status: Examination result status (Pass or Fail).
-- examdate: Examination date.
-- Primary Key: Composite key (sidno, ecode).
+Associates students with examinations and stores their examination participation details.
+- StudentID (PK, FK): References the student.
+- ExamCode (PK, FK): References the examination.
+- RoomID (FK): References the examination room assigned to the student.
+- Mark: Student's examination mark.
+- Status: Student's attendance status (Scheduled, Taken, or Absent).
+- ExamDate: Date of the examination.
+- Primary Key: Composite key (StudentID, ExamCode).
+- Additional Foreign Key Constraint: The combination of ExamCode and RoomID references ExamRoomAssignment (ExamCode, RoomID). This ensures that a student can only be assigned to a room allocated to that particular examination.
 8. ExamRoomAssignment
-Connects examinations with examination rooms.
-- ecode (PK, FK): Examination code.
-- RoomID (PK, FK): Examination room ID.
-- Primary Key: Composite key (ecode, RoomID).
+Associates examinations with the rooms allocated for them.
+- ExamCode (PK, FK): References the examination.
+- RoomID (PK, FK): References the examination room.
+- Primary Key: Composite key (ExamCode, RoomID).
 9. ExamTeacher
-Connects teachers with examinations they prepare.
-- ecode (PK, FK): Examination code.
-- Tid (PK, FK): Teacher ID.
-- Primary Key: Composite key (ecode, Tid).
+Associates teachers with examinations they prepare or create.
+- ExamCode (PK, FK): References the examination.
+- TeacherID (PK, FK): References the teacher.
+- Primary Key: Composite key (ExamCode, TeacherID).
 10. TeacherRoomAssignment
-Connects teachers with examination rooms assigned to them.
-- Tid (PK, FK): Teacher ID.
-- RoomID (PK, FK): Examination room ID.
-- Primary Key: Composite key (Tid, RoomID).
+Associates teachers with examination rooms assigned to them.
+- TeacherID (PK, FK): References the teacher.
+- RoomID (PK, FK): References the examination room.
+- Primary Key: Composite key (TeacherID, RoomID).
 11. ExamTeacherView
-Connects teachers with examinations they review and stores their examination evaluations.
-- Tid (PK, FK): Teacher ID.
-- ecode (PK, FK): Examination code.
-- audited: Indicates whether the examination has been reviewed.
-- status: Examination difficulty evaluation.
-- Primary Key: Composite key (Tid, ecode).
-The status attribute represents the teacher's evaluation of examination difficulty:
-     - Easy
-     - Medium
-     - Difficult
+Stores information about teachers who review or audit examinations.
+- TeacherID (PK, FK): References the teacher.
+- ExamCode (PK, FK): References the examination.
+- Audited: Indicates whether the teacher has reviewed or audited the examination.
+- Status: Indicates the difficulty level of the examination (Easy, Medium, or Difficult).
+- Primary Key: Composite key (TeacherID, ExamCode).
+
+### Design Notes
+
+- Naming Convention: Descriptive PascalCase names are used consistently for tables and attributes.
+- Department Head: DepartmentHeadName stores the department head's name, not a foreign key.
+- Question Paper: The Question table represents a question paper containing multiple questions.
+- Student Examination Status: Status records attendance, not pass/fail results.
+- Derived Mark: In the conceptual ER diagram, Mark is a derived attribute. Its implementation as a stored value should be documented according to the examination marking process.
+- Examination Room Allocation: Room assignments are specific to each examination, not permanent student assignments.
+- Retake Assumption: A student can take a particular examination only once in this project. Therefore, (StudentID, ExamCode) is sufficient as the composite primary key of StudentExam.
+- Difficulty Status: In ExamTeacherView, Status represents examination difficulty, whereas in StudentExam, Status represents student attendance. These attributes have different meanings despite sharing the same name.
 
 ## Relationship Mapping
 
@@ -111,28 +119,51 @@ The following list summarizes how the ERD relationships are implemented in the r
 - Teacher – ExamRoom (Assign) (Many-to-Many): TeacherRoomAssignment.
 - Teacher – Exam (View) (Many-to-Many): ExamTeacherView.
 
-## Primary Key and Foreign Key Constraints
+## Important Design Constraints and Assumptions
+### Student Examination Participation
 
-- Each main entity table has a primary key that uniquely identifies each record.
-- Associative tables use composite primary keys to prevent duplicate relationship records.
-- Foreign keys maintain referential integrity between related tables.
-- The combination of bnum and roomnum in ExamRoom must be unique.
-- A student can take multiple examinations, but the same student cannot take the same examination more than once in this project.
+A student can participate in a particular examination only once in this project. Retake functionality is excluded from the current system.
 
-## Design Decisions and Assumptions
+Therefore, the combination of StudentID and ExamCode is used as the composite Primary Key in StudentExam.
 
-- RoomID is used as the primary key of ExamRoom, while (bnum, roomnum) has a UNIQUE constraint.
-- The Dhead attribute stores the department head's name.
-- One examination can contain multiple questions, but each question belongs to only one examination.
-- The examination duration is stored in the Exam table as time.
-- The Teacher–Exam View relationship is Many-to-Many.
-- The status attribute in ExamTeacherView represents examination difficulty: Easy, Medium, or Difficult.
-- The status attribute in StudentExam represents the student's result: Pass or Fail.
-- Student examination records are stored in StudentExam, including mark, status, and examdate.
-- Examination retakes are not included in the current project scope.
+### Examination Room Allocation
+
+- A student does not have a permanently assigned examination room. 
+- Instead, a room is assigned to a student for a specific examination through the StudentExam table.
+- The ExamRoomAssignment table identifies which rooms are allocated to each examination.
+- A composite Foreign Key (ExamCode, RoomID) in StudentExam references the corresponding pair in ExamRoomAssignment. This ensures that a student cannot be assigned to a room that has not been allocated to that examination.
+
+### Derived Mark Attribute
+
+In the conceptual ERD, Mark is identified as a derived attribute.
+
+It represents the student's calculated examination result. Depending on the final examination marking process, the system may calculate the mark and store the resulting value in StudentExam.
+
+The actual marking process and its implementation will be defined during database development.
+
+### Department Head
+
+DepartmentHeadName stores the name of the department head as specified in the original ERD. It is not treated as a Foreign Key to the Teacher table.
+
+### Question Paper Representation
+
+The Question table represents a complete question paper or collection of questions.
+
+NumberOfQuestions represents the total number of questions in that paper, while TimeAllowed represents the total time allocated to complete it.
+
+The time unit must be defined consistently during implementation.
+
+### Different Meanings of Status
+
+The Status attribute appears in two different tables but has different meanings:
+- In StudentExam, it represents student attendance.
+- In ExamTeacherView, it represents examination difficulty.
+These attributes must be documented and constrained separately.
 
 ## Conclusion
 
-This relational schema provides the structural foundation for implementing the Final Examination Management System using Microsoft SQL Server.
+The relational schema consists of 11 tables designed to represent the entities and relationships of the Final Examination Management System.
 
-The next design stage is database normalization, followed by SQL Server implementation.
+Primary Keys uniquely identify records, Foreign Keys maintain referential integrity, and associative tables resolve Many-to-Many relationships.
+
+The schema provides the logical foundation for implementing the database in Microsoft SQL Server.
