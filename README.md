@@ -1,21 +1,23 @@
 # Final Examination Management System
 
-A relational database project developed using Microsoft SQL Server to manage student examinations, departments, teachers, examination rooms, questions, examination results, and examination auditing.
+A relational database project developed using Microsoft SQL Server to manage university final examinations, students, departments, teachers, examination rooms, questions, examination results, and examination auditing.
 
-## Project Overview
+## 📌Project Overview
 
-The Final Examination Management System is designed to organize and manage examination-related information through a structured relational database.
+The Final Examination Management System is designed to organize and manage university examination-related information through a structured relational database.
 The project focuses on database design, implementation, data integrity, SQL programming, and database administration.
+It demonstrates how relational database concepts can be applied to manage examination information efficiently and consistently.
 
-## Objectives
+## 🎯 Project Objectives
 
 - Design and implement a relational database.
 - Manage student and department information.
 - Organize teachers and examination rooms.
-- Manage examinations and examination questions.
-- Record student examination results.
+- Manage examinations and examination question papers.
+- Record student examination participation and results.
+- Manage teacher assignments and examination reviews.
 - Implement SQL Views, Stored Procedures, and Triggers.
-- Explore database backup and recovery.
+- Demonstrate database backup and recovery.
 
 ## Technologies
 
@@ -25,14 +27,30 @@ The project focuses on database design, implementation, data integrity, SQL prog
 - Git
 - GitHub
 
-## Main Entities
+## 🗂️ Database Overview
 
-- Student
-- Department
-- Teacher
-- Exam Room
-- Exam
-- Question
+The database consists of 11 relational tables organized to manage the following entities and relationships:
+
+- Department  - StudentExam
+- Student     - ExamRoomAssignment
+- Teacher     - ExamTeacher
+- ExamRoom    - TeacherRoomAssignment
+- Exam        - ExamTeacherView
+- Question 
+
+## ⚙️ Key Database Features
+
+- Entity Relationship Modeling (ERD)
+- Relational Database Design
+- Database Normalization
+- Primary Keys and Foreign Keys
+- Composite Primary Keys
+- Unique and Check Constraints
+- SQL Queries and Joins
+- Database Views
+- Stored Procedures
+- Database Triggers
+- Database Backup and Recovery
 
 ## Project Structure
 
@@ -61,22 +79,44 @@ Final-Examination-Management-System/
     - tables.png
     - query_results.png
 
-## Key Database Concepts
+## 🚀 Getting Started
+### Prerequisites
 
-- Entity Relationship Modeling (ERD)
-- Relational Database Design
-- Primary Keys and Foreign Keys
+Before running this project, make sure you have:
+
+- Microsoft SQL Server installed.
+- SQL Server Management Studio (SSMS) or a compatible SQL development environment.
+- Git installed (optional, for cloning the repository).
+
+### Installation
+
+1. Clone the repository:
+git clone [YOUR_REPOSITORY_URL](https://github.com/minasemengesha/final-examination-management-system) 
+2. Open the project folder in Visual Studio Code or SSMS.
+3. Navigate to the database/ directory.
+4. Execute the SQL scripts in the following order:
+Order SQL Script               Description                                            1      01_create_database.sql   Create the database                                  2      02_create_tables.sql     Create all tables                                    3      03_constraints.sql       Add database constraints                             4      04_insert_data.sql       Insert sample records                                5      05_queries.sql           Execute SQL queries                                   6      06_views.sql             Create database views                                7      07_stored_procedures.sql Create stored procedures                             8      08_triggers.sql          Create database triggers                             9      09_database_recovery.sql Demonstrate backup and recovery 
+
+Note: Review the backup file location in 09_database_recovery.sql and adjust it to match your SQL Server environment.
+
+## 📚 Documentation
+
+Detailed project documentation is available in the docs/ directory:
+
+- Project Description
+- Requirements
+- Entity Relationship Diagram
+- Relational Schema
 - Database Normalization
-- SQL Queries and Joins
-- Views
-- Stored Procedures
-- Triggers
-- Database Backup and Recovery
 
-## Author
+## 📸 Screenshots
+
+Project implementation screenshots are available in the screenshots/ directory.
+
+## 👨‍💻 Author
 
 Minase Mengesha
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
