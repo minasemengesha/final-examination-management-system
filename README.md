@@ -106,8 +106,7 @@ Before running this project, make sure you have:
 - 07_stored_procedures.sql 
 - 08_triggers.sql            
 - 09_database_recovery.sql
-
-Note: Review the backup file location in 09_database_recovery.sql and adjust it to match your SQL Server environment.
+- 10_run_all.aql
 
 ## 📚 Documentation
 
