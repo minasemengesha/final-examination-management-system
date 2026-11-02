@@ -111,12 +111,12 @@ Note: Review the backup file location in 09_database_recovery.sql and adjust it 
 
 ## 📚 Documentation
 
-- [Requirements](docs/Client-Interview-Form.pdf)
-- [Project Description](docs/Project-Documentation.pdf)
+- [Requirements](docs/requirements.md)
+- [Project Description](docs/project-description.md)
 - ERD
 ![ERD](docs/ERD.png)
-- [Relational Schema](docs/Client-Interview-Form.pdf)
-- [Normalization](docs/Project-Documentation.pdf)
+- [Relational Schema](docs/relational-schema.md)
+- [Normalization](docs/normalization.md)
 
 ## 📸 Screenshots
 
