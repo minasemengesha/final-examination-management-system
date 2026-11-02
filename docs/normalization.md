@@ -34,7 +34,9 @@ A relation is in First Normal Form (1NF) if:
 
 Consider a StudentExamination table containing multiple examination codes in one attribute.
 
-StudentID   StudentName    ExamCodes         ST001        Abebe Kebede   EX001, EX002      ST002        Hana Bekele    EX001, EX003 
+StudentID   StudentName    ExamCodes         
+ST001        Abebe Kebede   EX001, EX002      
+ST002        Hana Bekele    EX001, EX003 
 
 The ExamCodes column contains multiple values in a single cell. This violates First Normal Form.
 
@@ -42,7 +44,11 @@ The ExamCodes column contains multiple values in a single cell. This violates Fi
 
 To achieve 1NF, each examination code must be stored as an individual value in a separate record.
 
-StudentID  StudentName     ExamCode              ST001       Abebe Kebede    EX001              ST001       Abebe Kebede    EX002              ST002       Hana Bekele     EX001              ST002       Hana Bekele     EX003 
+StudentID  StudentName     ExamCode              
+ST001       Abebe Kebede    EX001              
+ST001       Abebe Kebede    EX002              
+ST002       Hana Bekele     EX001              
+ST002       Hana Bekele     EX003 
 
 Now, each cell contains a single atomic value.
 
@@ -75,7 +81,10 @@ A relation is in Second Normal Form (2NF) if:
 
 Consider the following StudentExam table:
 
-StudentID  ExamCode  StudentName ExamName      Mark ST001       EX001     Abebe Kebede  Database    85 ST001       EX002     Abebe Kebede  Programming 90 ST002       EX001     Hana Bekele   Database    78
+StudentID  ExamCode  StudentName ExamName      Mark 
+ST001       EX001     Abebe Kebede  Database    85 
+ST001       EX002     Abebe Kebede  Programming 90 
+ST002       EX001     Hana Bekele   Database    78
 
 Assume that the composite Primary Key is (StudentID, ExamCode).
 
@@ -93,15 +102,22 @@ To eliminate partial dependencies, the data is separated into three tables.
 
 Student Table
 
-StudentID (PK)   StudentName                    ST001             Abebe Kebede                 ST002             Hana Bekele 
+StudentID (PK)   StudentName                    
+ST001             Abebe Kebede                 
+ST002             Hana Bekele 
 
 Exam Table
 
-ExamCode (PK) ExamName                             EX001          Database                         EX002          Programming
+ExamCode (PK) ExamName                             
+EX001          Database                         
+EX002          Programming
 
 StudentExam Table
 
-StudentID (PK, FK)  ExamCode (PK, FK)    Mark     ST001                EX001                85      ST001                EX002                90    ST002                EX001                78 
+StudentID (PK, FK)  ExamCode (PK, FK)    Mark     
+ST001                EX001                85      
+ST001                EX002                90    
+ST002                EX001                78 
 
 Now:
 
@@ -154,7 +170,10 @@ A transitive dependency occurs when a non-key attribute depends on another non-k
 
 Consider the following Student table:
 
-StudentID StudentName   DepartmentID DepartmentName ST001      Abebe Kebede  DEP01        Software Engi ST002      Hana Bekele   DEP02        Computer Sci ST003      Dawit Alemu   DEP01        Software Engi
+StudentID StudentName   DepartmentID DepartmentName 
+ST002      Abebe Kebede  DEP01        Software Engi 
+ST002      Hana Bekele   DEP02        Computer Sci 
+ST003      Dawit Alemu   DEP01        Software Engi
 
 Here:
 
@@ -175,11 +194,16 @@ To eliminate the transitive dependency, the information is separated into two ta
 
 Student Table
 
-StudentID (PK)     StudentName   DepartmentID (FK)ST001               Abebe Kebede   DEP01        ST002               Hana Bekele    DEP02       ST003               Dawit Alemu    DEP01 
+StudentID (PK)     StudentName   DepartmentID (FK)
+ST001               Abebe Kebede   DEP01        
+ST002               Hana Bekele    DEP02       
+ST003               Dawit Alemu    DEP01 
 
 Department Table
 
-DepartmentID (PK)   DepartmentName             DEP01                 Software Engineering      DEP02                 Computer Science 
+DepartmentID (PK)   DepartmentName             
+DEP01                 Software Engineering      
+DEP02                 Computer Science 
 
 Now:
 
@@ -245,6 +269,23 @@ Teacher and ExamRoom
 - TeacherRoomAssignment manages the assignment relationship.
 
 By separating these entities and their relationships, the design avoids storing the same descriptive information repeatedly across unrelated records.
+
+## Normalization of Associative Tables
+
+Associative tables are used to resolve Many-to-Many relationships. Their composite Primary Keys help identify each unique relationship.
+
+The following table summarizes their keys and non-key attributes.
+
+Table                  Composite   Primary Key       Non-Key Attributes
+StudentExam             StudentID,  ExamCode RoomID,  Mark, Status, ExamDate
+ExamRoomAssignment      ExamCode,   RoomID            None 
+ExamTeacher             ExamCode,   TeacherID         None
+TeacherRoomAssignment   TeacherID,  RoomID            None
+ExamTeacherView         TeacherID,  ExamCode          Audited, Status 
+
+- For associative tables with no additional non-key attributes, the composite Primary Key identifies each relationship record.
+
+- For tables with additional attributes, those attributes describe the complete relationship represented by the composite Primary Key.
 
 ## Conclusion
 
