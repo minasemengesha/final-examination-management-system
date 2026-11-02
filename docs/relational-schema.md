@@ -93,17 +93,6 @@ Stores information about teachers who review or audit examinations.
 - Status: Indicates the difficulty level of the examination (Easy, Medium, or Difficult).
 - Primary Key: Composite key (TeacherID, ExamCode).
 
-### Design Notes
-
-- Naming Convention: Descriptive PascalCase names are used consistently for tables and attributes.
-- Department Head: DepartmentHeadName stores the department head's name, not a foreign key.
-- Question Paper: The Question table represents a question paper containing multiple questions.
-- Student Examination Status: Status records attendance, not pass/fail results.
-- Derived Mark: In the conceptual ER diagram, Mark is a derived attribute. Its implementation as a stored value should be documented according to the examination marking process.
-- Examination Room Allocation: Room assignments are specific to each examination, not permanent student assignments.
-- Retake Assumption: A student can take a particular examination only once in this project. Therefore, (StudentID, ExamCode) is sufficient as the composite primary key of StudentExam.
-- Difficulty Status: In ExamTeacherView, Status represents examination difficulty, whereas in StudentExam, Status represents student attendance. These attributes have different meanings despite sharing the same name.
-
 ## Relationship Mapping
 
 The following list summarizes how the ERD relationships are implemented in the relational database.
@@ -159,6 +148,17 @@ The Status attribute appears in two different tables but has different meanings:
 - In StudentExam, it represents student attendance.
 - In ExamTeacherView, it represents examination difficulty.
 These attributes must be documented and constrained separately.
+
+### Design Notes
+
+- Naming Convention: Descriptive PascalCase names are used consistently for tables and attributes.
+- Department Head: DepartmentHeadName stores the department head's name, not a foreign key.
+- Question Paper: The Question table represents a question paper containing multiple questions.
+- Student Examination Status: Status records attendance, not pass/fail results.
+- Derived Mark: In the conceptual ER diagram, Mark is a derived attribute. Its implementation as a stored value should be documented according to the examination marking process.
+- Examination Room Allocation: Room assignments are specific to each examination, not permanent student assignments.
+- Retake Assumption: A student can take a particular examination only once in this project. Therefore, (StudentID, ExamCode) is sufficient as the composite primary key of StudentExam.
+- Difficulty Status: In ExamTeacherView, Status represents examination difficulty, whereas in StudentExam, Status represents student attendance. These attributes have different meanings despite sharing the same name.
 
 ## Conclusion
 
