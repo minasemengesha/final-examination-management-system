@@ -100,3 +100,38 @@ CREATE TABLE ExamTeacherView (
     Status VARCHAR(20) NOT NULL
 );
 GO
+
+USE FinalExamination;
+GO
+
+
+-- To See The Tables List --
+SELECT
+    TABLE_NAME AS TableName
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE'
+ORDER BY TABLE_NAME;
+GO
+
+USE FinalExamination;
+GO
+
+SELECT
+    S.StudentID,
+    CONCAT(S.FirstName, ' ', S.MiddleName, ' ', S.LastName) AS StudentName,
+    D.DepartmentName,
+    E.ExamCode,
+    E.ExamName,
+    SE.RoomID,
+    SE.ExamDate,
+    SE.Mark,
+    SE.Status
+FROM Student AS S
+INNER JOIN Department AS D
+    ON S.DepartmentID = D.DepartmentID
+INNER JOIN StudentExam AS SE
+    ON S.StudentID = SE.StudentID
+INNER JOIN Exam AS E
+    ON SE.ExamCode = E.ExamCode
+ORDER BY S.StudentID;
+GO
