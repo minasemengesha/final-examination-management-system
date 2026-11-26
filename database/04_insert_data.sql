@@ -121,3 +121,28 @@ VALUES
     (2004, 'SE104', 1, 'Medium'),
     (2005, 'SE105', 0, 'Easy');
 GO
+
+-- To test the recorded --
+
+USE FinalExamination;
+GO
+
+SELECT
+    S.StudentID,
+    CONCAT(S.FirstName, ' ', S.MiddleName, ' ', S.LastName) AS StudentName,
+    D.DepartmentName,
+    E.ExamCode,
+    E.ExamName,
+    SE.RoomID,
+    SE.ExamDate,
+    SE.Mark,
+    SE.Status
+FROM Student AS S
+INNER JOIN Department AS D
+    ON S.DepartmentID = D.DepartmentID
+INNER JOIN StudentExam AS SE
+    ON S.StudentID = SE.StudentID
+INNER JOIN Exam AS E
+    ON SE.ExamCode = E.ExamCode
+ORDER BY S.StudentID;
+GO
