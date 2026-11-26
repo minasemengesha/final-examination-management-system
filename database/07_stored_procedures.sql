@@ -121,7 +121,7 @@ EXEC sp_UpdateStudentExamMark
     @Mark = 88.50;
 GO
 
--- To check The Result --
+-- To check for above The Result --
 SELECT *
 FROM StudentExam
 WHERE StudentID = 1003
