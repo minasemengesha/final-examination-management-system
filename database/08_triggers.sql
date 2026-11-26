@@ -83,7 +83,7 @@ BEGIN
     END;
 END;
 GO
--- The Wrong Test: --
+-- The Right Test: --
 UPDATE StudentExam
 SET Mark = 95
 WHERE StudentID = 1003
